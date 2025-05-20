@@ -1,0 +1,321 @@
+:root {
+    --pink: #ff9ff3;
+    --dark-pink: #f368e0;
+    --black: #2d3436;
+    --gold: #feca57;
+    --light-bg: #fff9f9;
+    --text-light: #dfe6e9;
+    --dark-bg: #2d3436;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background 0.3s, color 0.3s;
+}
+
+body {
+    background: var(--light-bg);
+    color: var(--black);
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+body.dark-mode {
+    background: var(--dark-bg);
+    color: var(--text-light);
+}
+
+.hero {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7);
+}
+
+.hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 2;
+    width: 80%;
+}
+
+.hero-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: 2px solid var(--gold);
+}
+
+.dark-mode .container {
+    background: #636e72;
+    border-color: var(--gold);
+}
+
+header {
+    background: linear-gradient(135deg, var(--pink), var(--dark-pink));
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dark-mode-toggle {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.input-section {
+    padding: 1.5rem;
+    background: white;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.5fr auto;
+    gap: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.dark-mode .input-section {
+    background: #636e72;
+}
+
+.input-section input, 
+.input-section select {
+    padding: 12px 15px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.dark-mode .input-section input,
+.dark-mode .input-section select {
+    background: #2d3436;
+    color: white;
+    border-color: #555;
+}
+
+.input-section button {
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    border-radius: 8px;
+    padding: 0 20px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.receipt-upload {
+    padding: 0 1.5rem 1.5rem;
+    text-align: center;
+}
+
+.receipt-upload label {
+    background: var(--dark-pink);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+}
+
+.receipt-upload label:hover {
+    background: #e056fd;
+}
+
+.summary {
+    padding: 1.5rem;
+    background: white;
+    border-bottom: 1px solid #eee;
+}
+
+.dark-mode .summary {
+    background: #636e72;
+}
+
+.budget-setter {
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.budget-setter input {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 100px;
+}
+
+.dark-mode .budget-setter input {
+    background: #2d3436;
+    color: white;
+    border-color: #555;
+}
+
+.total, .remaining {
+    font-size: 1.3rem;
+    margin: 0.5rem 0;
+}
+
+.total span {
+    color: var(--dark-pink);
+    font-weight: bold;
+}
+
+.remaining span {
+    color: var(--gold);
+    font-weight: bold;
+}
+
+.expense-list {
+    padding: 1.5rem;
+}
+
+.expense-list h2 {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.expense-list ul {
+    list-style: none;
+}
+
+.expense-list li {
+    padding: 15px;
+    margin-bottom: 10px;
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid var(--pink);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.dark-mode .expense-list li {
+    background: #555;
+}
+
+.category-tag {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+.household { background: #fdcb6e; color: #2d3436; }
+.shopping { background: #a29bfe; color: white; }
+.health { background: #00b894; color: white; }
+.travel { background: #0984e3; color: white; }
+.education { background: #6c5ce7; color: white; }
+.pets { background: #e84393; color: white; }
+.gifts { background: #fd79a8; color: white; }
+
+.chart-container {
+    margin-top: 1.5rem;
+}
+
+.chart-row {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+}
+
+.chart-label {
+    width: 100px;
+    font-weight: 600;
+}
+
+.chart-bar-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.chart-bar {
+    height: 20px;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+.chart-value {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.dark-mode .chart-value {
+    color: #bbb;
+}
+
+.reset-btn {
+    display: block;
+    margin: 1.5rem auto;
+    padding: 10px 20px;
+    background: var(--black);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.dark-mode .reset-btn {
+    background: #111;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .input-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.8rem;
+    }
+}

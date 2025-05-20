@@ -1,321 +1,835 @@
-:root {
-    --pink: #ff9ff3;
-    --dark-pink: #f368e0;
-    --black: #2d3436;
-    --gold: #feca57;
-    --light-bg: #fff9f9;
-    --text-light: #dfe6e9;
-    --dark-bg: #2d3436;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    transition: background 0.3s, color 0.3s;
-}
-
 body {
-    background: var(--light-bg);
-    color: var(--black);
-    min-height: 100vh;
-    padding: 2rem;
+    margin: 0;
+    font-family: 'Arial', sans-serif; /* Example font, adjust as needed */
+    color: var(--text-color-light); /* Default text color */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    background-color: var(--dark-bg); /* Default background for dashboard */
 }
 
+/* Variables for theming with specified colors */
+:root {
+    --black: #562646;
+    --dark-grey: #983b90; /* Slightly darker black for backgrounds */
+    --white: #9bc9e9;
+    --light-grey: #e0e0e0; /* A softer, slightly less stark white for text/elements */
+    --pink: #3e1438; /* More vibrant deep pink */
+    --vibrant-pink: #090d1e; /* Brighter, more energetic pink for accents */
+    --golden: #b4a572; /* Brighter, more saturated gold */
+    --light-golden: #aa8b23; /* Lighter, softer golden for subtle accents */
+
+    --primary-gradient-start: var(--pink);
+    --primary-gradient-end: var(--golden);
+
+    --dark-bg: var(--dark-grey);
+    --light-bg: var(--light-grey);
+    --text-color-light: var(--white);
+    --text-color-dark: var(--black);
+    --card-bg-light: rgba(64, 18, 18, 0.15); /* Slightly less transparent white for cards */
+    --card-bg-dark: rgba(163, 68, 68, 0.4); /* Slightly less transparent black for dark mode cards */
+}
+
+/* Dark Mode Specific Styles (adjusting to the new palette) */
 body.dark-mode {
-    background: var(--dark-bg);
-    color: var(--text-light);
+    background-color: var(--black); /* Pure black for dark mode background */
+    color: var(--text-color-light);
 }
 
+body.dark-mode .dashboard-header {
+    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), 
+                url('https://source.unsplash.com/random/1920x300/?dark,finance,tech,abstract') no-repeat center center/cover; /* Darker image for dark mode */
+}
+
+body.dark-mode .card {
+    background: var(--card-bg-dark);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.7); /* Stronger shadow in dark mode */
+}
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode button:not(.cta-button):not(.main-cta) {
+    background-color: rgba(255, 255, 255, 0.08); /* Slightly more visible inputs */
+    color: var(--text-color-light);
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Stronger border */
+}
+
+body.dark-mode .cta-button,
+body.dark-mode .main-cta {
+    background: linear-gradient(90deg, var(--vibrant-pink), var(--golden)); /* Vibrant gradient for dark mode buttons */
+}
+
+body.dark-mode .cta-button:hover,
+body.dark-mode .main-cta:hover {
+    background: linear-gradient(90deg, var(--golden), var(--vibrant-pink)); /* Reverse gradient on hover */
+}
+
+
+/* Hero Section (index.html) */
 .hero {
+    /* Background image related to finance with a subtle overlay */
+    background: 
+        linear-gradient(135deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.6)), /* Slightly darker black overlay for readability */
+        url('https://source.unsplash.com/random/1920x1080/?finance,money,budget,stocks,abstract') no-repeat center center/cover; /* Dynamic finance-related image */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     position: relative;
-    height: 300px;
-    overflow: hidden;
-    margin-bottom: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    overflow: hidden; /* Ensure bubbles and patterns don't overflow */
 }
 
-.hero img {
+/* Optional: Pattern overlay for more texture on hero section */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    filter: brightness(0.7);
+    background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMCIgY3k9IjEwIiByPSIxIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIwLjE1Ii8+PC9zdmc+') repeat; /* Small white dots pattern, slightly more opaque */
+    opacity: 0.15;
+    pointer-events: none; /* Allows clicks to pass through */
+    z-index: 1;
 }
 
-.hero-content {
+/* Navigation (index.html) */
+nav {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: white;
-    z-index: 2;
-    width: 80%;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
 }
 
-.hero-content h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    border: 2px solid var(--gold);
+nav ul li {
+    display: inline-block;
 }
 
-.dark-mode .container {
-    background: #636e72;
-    border-color: var(--gold);
-}
-
-header {
-    background: linear-gradient(135deg, var(--pink), var(--dark-pink));
-    color: white;
-    padding: 1.5rem;
-    text-align: center;
-    position: relative;
+.cta-button {
+    background: linear-gradient(90deg, var(--pink), var(--golden)); /* Pink to Golden gradient */
+    color: var(--text-color-light);
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 8px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3); /* Stronger shadow */
 }
 
-.dark-mode-toggle {
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 1.2rem;
-    cursor: pointer;
+.cta-button:hover {
+    background: linear-gradient(90deg, var(--golden), var(--pink)); /* Reverse gradient on hover */
+    transform: translateY(-3px); /* More pronounced lift */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4); /* Stronger shadow on hover */
 }
 
-.input-section {
-    padding: 1.5rem;
-    background: white;
-    display: grid;
-    grid-template-columns: 2fr 1fr 1.5fr auto;
-    gap: 10px;
-    border-bottom: 1px solid #eee;
+/* Hero Content (index.html) */
+.hero-content {
+    position: relative;
+    z-index: 2; /* Ensure content is above overlays */
+    max-width: 900px;
+    padding: 20px;
 }
 
-.dark-mode .input-section {
-    background: #636e72;
+.hero-content h1 {
+    font-size: 3.8em; /* Slightly larger font size */
+    margin-bottom: 15px;
+    color: var(--text-color-light);
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.6); /* More pronounced text shadow */
 }
 
-.input-section input, 
-.input-section select {
-    padding: 12px 15px;
-    border: 2px solid #eee;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: all 0.3s;
+.hero-content .tagline {
+    font-size: 1.6em; /* Slightly larger tagline */
+    margin-bottom: 50px;
+    color: var(--light-grey);
 }
 
-.dark-mode .input-section input,
-.dark-mode .input-section select {
-    background: #2d3436;
-    color: white;
-    border-color: #555;
+/* Features Grid (index.html) */
+.features-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px; /* Increased gap */
+    margin-bottom: 70px;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
-.input-section button {
-    background: var(--gold);
-    color: var(--black);
-    border: none;
-    border-radius: 8px;
-    padding: 0 20px;
-    font-weight: 600;
-    cursor: pointer;
+.feature-card {
+    background: var(--card-bg-light); /* Semi-transparent white background */
+    backdrop-filter: blur(12px); /* Slightly more blur */
+    border-radius: 20px; /* More rounded corners */
+    padding: 35px; /* Increased padding */
+    width: 300px; /* Slightly wider cards */
+    text-align: center;
+    box-shadow: 0 10px 35px 0 rgba(0, 0, 0, 0.4); /* Stronger shadow */
+    border: 1px solid rgba(255, 255, 255, 0.25); /* Stronger border */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-15px); /* More pronounced lift */
+    box-shadow: 0 15px 45px 0 rgba(0, 0, 0, 0.6); /* Stronger shadow on hover */
+}
+
+.icon-circle {
+    background: linear-gradient(45deg, var(--pink), var(--golden));
+    border-radius: 50%;
+    width: 80px; /* Larger icon circles */
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    margin: 0 auto 25px auto; /* Increased margin */
+    font-size: 2.2em; /* Larger icons */
+    color: var(--text-color-light);
 }
 
-.receipt-upload {
-    padding: 0 1.5rem 1.5rem;
+.feature-card h3 {
+    font-size: 1.8em; /* Larger heading */
+    margin-bottom: 12px;
+    color: var(--text-color-light);
+}
+
+.feature-card p {
+    font-size: 1.1em; /* Slightly larger paragraph text */
+    color: var(--light-grey);
+}
+
+/* Main CTA Button (index.html) */
+.main-cta {
+    background: linear-gradient(90deg, var(--pink), var(--golden));
+    color: var(--text-color-light);
+    padding: 18px 35px; /* Increased padding */
+    border-radius: 35px; /* More rounded */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.3em; /* Larger font size */
+    display: inline-flex;
+    align-items: center;
+    gap: 12px; /* Increased gap */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4); /* Stronger shadow */
+}
+
+.main-cta:hover {
+    transform: translateY(-7px); /* More pronounced lift */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6); /* Stronger shadow on hover */
+}
+
+/* Animations (index.html) */
+.slide-in {
+    opacity: 0;
+    transform: translateY(30px); /* More pronounced slide */
+    animation: slideIn 1.2s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Slower animation */
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1.8s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Slower animation */
+    animation-delay: 0.7s; /* Increased delay */
+}
+
+.pop-in {
+    opacity: 0;
+    transform: scale(0.8); /* Starts smaller */
+    animation: popIn 1s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Slower animation */
+    animation-delay: var(--delay);
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes popIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Pulse animation for CTA button */
+.pulse-animate {
+    animation: pulse 2.5s infinite; /* Slower pulse */
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7); /* Golden pulse */
+    }
+    70% {
+        transform: scale(1.07); /* More pronounced pulse */
+        box-shadow: 0 0 0 25px rgba(255, 193, 7, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0);
+    }
+}
+
+/* Glow animation for main CTA */
+.glow-animate {
+    position: relative;
+}
+
+.glow-animate::before {
+    content: '';
+    position: absolute;
+    top: -8px; /* Larger glow area */
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    background: linear-gradient(90deg, var(--pink), var(--golden), var(--pink));
+    background-size: 200% 200%;
+    border-radius: 40px; /* Matches button border-radius */
+    opacity: 0.6; /* Slightly more opaque glow */
+    z-index: -1;
+    filter: blur(12px); /* More blur */
+    animation: glow 4s linear infinite; /* Slower glow */
+}
+
+@keyframes glow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
+/* Scrolling Bubbles (Decorative) */
+.scrolling-bubbles {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0; /* Behind content */
+}
+
+.bubble {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.15); /* Slightly more opaque white transparent bubbles */
+    border-radius: 50%;
+    animation: floatUp 20s infinite ease-in-out; /* Slower float */
+    filter: blur(3px); /* More blur */
+}
+
+/* Randomize bubble positions and sizes - simplified for brevity */
+.scrolling-bubbles .bubble:nth-child(1) {
+    width: var(--size);
+    height: var(--size);
+    left: var(--x);
+    animation-delay: var(--delay);
+}
+.scrolling-bubbles .bubble:nth-child(2) {
+    width: var(--size);
+    height: var(--size);
+    left: var(--x);
+    animation-delay: var(--delay);
+}
+.scrolling-bubbles .bubble:nth-child(3) {
+    width: var(--size);
+    height: var(--size);
+    left: var(--x);
+    animation-delay: var(--delay);
+}
+
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) translateX(0);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-50vh) translateX(50px);
+        opacity: 0;
+    }
+}
+
+/* Dashboard Specific Styles (dashboard.html) */
+.dashboard-header {
+    background: linear-gradient(rgba(6, 47, 68, 0.9), rgba(60, 4, 26, 0.9)), 
+                url('https://source.unsplash.com/random/1920x300/?financial,charts,economy,black,gold') no-repeat center center/cover; /* Dynamic finance-related header image with black/gold tone */
+    background-size: cover;
+    padding: 25px; /* Increased padding */
+    color: var(--text-color-light);
     text-align: center;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3); /* Stronger shadow */
+    position: relative; /* Needed for positioning elements inside */
+    z-index: 5; /* Ensure header is above main content */
+}
+
+.dashboard-header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: static; /* Override absolute positioning from hero nav */
+}
+
+.dashboard-header h1 {
+    margin: 0;
+    font-size: 2.2em; /* Slightly larger heading */
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Increased gap */
+}
+
+.home-link {
+    color: var(--text-color-light);
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 6px; /* Slightly larger gap */
+    transition: color 0.3s ease;
+}
+
+.home-link:hover {
+    color: var(--golden); /* Golden on hover */
+}
+
+.user-controls button {
+    background: none;
+    border: none;
+    color: var(--text-color-light);
+    font-size: 1.6em; /* Slightly larger icon */
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.user-controls button:hover {
+    color: var(--golden); /* Golden on hover */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 50px auto; /* Increased margin */
+    padding: 25px; /* Increased padding */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Slightly larger min-width for columns */
+    gap: 40px; /* Increased gap */
+}
+
+.card {
+    background: var(--card-bg-light);
+    backdrop-filter: blur(8px); /* Slightly more blur */
+    border-radius: 15px;
+    padding: 35px; /* Increased padding */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25); /* Stronger shadow */
+    border: 1px solid rgba(255,255,255,0.15); /* Slightly more opaque border */
+}
+
+.card h2 {
+    color: var(--text-color-light);
+    margin-top: 0;
+    margin-bottom: 25px; /* Increased margin */
+    font-size: 2em; /* Larger heading */
+    border-bottom: 3px solid var(--pink); /* Thicker pink accent */
+    padding-bottom: 12px; /* Increased padding */
+}
+
+.input-section input,
+.input-section select {
+    width: calc(100% - 24px); /* Adjust width for new padding */
+    padding: 14px; /* Increased padding */
+    margin-bottom: 18px; /* Increased margin */
+    border-radius: 8px; /* More rounded */
+    border: 1px solid rgba(255,255,255,0.4); /* Stronger border */
+    font-size: 1.1em; /* Slightly larger font */
+    background-color: rgba(255, 255, 255, 0.12); /* Slightly more opaque white transparent background */
+    color: var(--text-color-light);
+}
+
+.input-section input::placeholder {
+    color: rgba(255, 255, 255, 0.7); /* More visible placeholder */
+}
+
+.input-section button {
+    background: linear-gradient(90deg, var(--pink), var(--golden)); /* Pink to Golden gradient */
+    color: var(--text-color-light);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    padding: 18px; /* Increased padding */
+    width: calc(100% - 24px); /* Match input width */
+    border-radius: 8px; /* More rounded */
+    font-weight: bold;
+    font-size: 1.1em; /* Slightly larger font */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3); /* Stronger shadow */
+}
+
+.input-section button:hover {
+    background: linear-gradient(90deg, var(--golden), var(--pink)); /* Reverse gradient on hover */
+    transform: translateY(-3px); /* More pronounced lift */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4); /* Stronger shadow on hover */
 }
 
 .receipt-upload label {
-    background: var(--dark-pink);
-    color: white;
-    padding: 10px 15px;
-    border-radius: 8px;
+    display: block;
+    background-color: var(--golden); /* Golden for upload button */
+    color: var(--text-color-dark); /* Dark text on golden */
+    padding: 14px; /* Increased padding */
+    border-radius: 8px; /* More rounded */
     cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s;
+    text-align: center;
+    margin-top: 15px; /* Increased margin */
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    font-size: 1.1em; /* Slightly larger font */
 }
 
 .receipt-upload label:hover {
-    background: #e056fd;
+    background-color: var(--light-golden); /* Slightly darker golden on hover */
 }
 
-.summary {
-    padding: 1.5rem;
-    background: white;
-    border-bottom: 1px solid #eee;
-}
-
-.dark-mode .summary {
-    background: #636e72;
-}
-
-.budget-setter {
-    margin: 1rem 0;
+.summary-item {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    margin-bottom: 18px; /* Increased margin */
+    font-size: 1.2em; /* Slightly larger font */
+    padding-bottom: 8px; /* Increased padding */
+    border-bottom: 1px dashed rgba(255,255,255,0.3); /* Slightly more opaque dashed line */
 }
 
-.budget-setter input {
-    padding: 8px 12px;
+.summary-item span {
+    font-weight: bold;
+}
+
+.summary-item input {
+    width: 110px; /* Slightly wider input */
+    text-align: right;
+    background-color: rgba(255, 255, 255, 0.15); /* Slightly more opaque */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Stronger border */
+    color: var(--text-color-light);
+    padding: 6px 10px; /* Increased padding */
     border-radius: 5px;
-    border: 1px solid #ddd;
-    width: 100px;
 }
 
-.dark-mode .budget-setter input {
-    background: #2d3436;
-    color: white;
-    border-color: #555;
+.summary-item .positive {
+    color: var(--golden); /* Golden for positive */
 }
 
-.total, .remaining {
-    font-size: 1.3rem;
-    margin: 0.5rem 0;
+.summary-item .negative {
+    color: var(--pink); /* Pink for negative */
 }
 
-.total span {
-    color: var(--dark-pink);
-    font-weight: bold;
-}
-
-.remaining span {
-    color: var(--gold);
-    font-weight: bold;
-}
-
-.expense-list {
-    padding: 1.5rem;
-}
-
-.expense-list h2 {
-    margin-bottom: 1rem;
+.reset-button {
+    background-color: var(--pink); /* Pink for reset button */
+    color: var(--text-color-light);
+    padding: 12px 25px; /* Increased padding */
+    border: none;
+    border-radius: 8px; /* More rounded */
+    cursor: pointer;
+    margin-top: 25px; /* Increased margin */
+    transition: background-color 0.3s ease;
+    font-size: 1.1em; /* Slightly larger font */
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 10px; /* Increased gap */
+    box-shadow: 0 6px 15px rgba(170, 86, 13, 0.3); /* Stronger shadow */
+}
+
+.reset-button:hover {
+    background-color: var(--vibrant-pink); /* Slightly brighter pink on hover */
+    transform: translateY(-2px); /* Slight lift */
 }
 
 .expense-list ul {
     list-style: none;
+    padding: 0;
 }
 
 .expense-list li {
-    padding: 15px;
-    margin-bottom: 10px;
-    background: white;
-    border-radius: 8px;
+    background: rgba(64, 14, 73, 0.1); /* Slightly more opaque */
+    border-radius: 10px; /* More rounded */
+    margin-bottom: 12px; /* Increased margin */
+    padding: 18px; /* Increased padding */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-    border-left: 4px solid var(--pink);
-    animation: fadeIn 0.3s ease-out;
+    flex-wrap: wrap; /* Allow wrapping of content */
+    gap: 12px; /* Increased gap */
+    transition: background-color 0.2s ease;
 }
 
-.dark-mode .expense-list li {
-    background: #555;
+.expense-list li:hover {
+    background-color: #ac389126; /* More opaque on hover */
+}
+
+.expense-info {
+    flex-grow: 1;
+}
+
+.expense-name {
+    font-weight: bold;
+    font-size: 1.2em; /* Larger font */
+    display: block;
+    margin-bottom: 6px;
+    color: var(--text-color-light);
+}
+
+.expense-meta {
+    font-size: 1em; /* Slightly larger font */
+    color: var(--light-grey);
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Increased gap */
+    flex-wrap: wrap;
 }
 
 .category-tag {
     display: inline-block;
-    padding: 3px 8px;
-    border-radius: 20px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    margin-left: 8px;
+    padding: 5px 10px; /* Increased padding */
+    border-radius: 6px; /* More rounded */
+    font-size: 0.9em; /* Slightly larger font */
+    font-weight: bold;
+    color: var(--text-color-dark); /* Dark text on colored tags */
 }
 
-.household { background: #fdcb6e; color: #2d3436; }
-.shopping { background: #a29bfe; color: white; }
-.health { background: #00b894; color: white; }
-.travel { background: #0984e3; color: white; }
-.education { background: #6c5ce7; color: white; }
-.pets { background: #e84393; color: white; }
-.gifts { background: #fd79a8; color: white; }
+/* Category specific colors (using the new palette where possible) */
+/* You might need to adjust these or add more if you want specific colors for each category */
+.category-tag[style*="background: #fdcb6e"] { background: var(--golden); } /* Household */
+.category-tag[style*="background: #a29bfe"] { background: var(--vibrant-pink); } /* Shopping */
+.category-tag[style*="background: #00b894"] { background: var(--light-golden); } /* Health */
+/* ... and so on for other categories, mapping them to your limited palette */
 
+
+.receipt-icon {
+    color: var(--golden); /* Golden for the receipt icon */
+}
+
+.expense-amount {
+    font-size: 1.3em; /* Larger font */
+    font-weight: bold;
+    color: var(--golden); /* Golden for amounts */
+}
+
+.expense-actions button {
+    background: none;
+    border: none;
+    color: var(--light-grey);
+    font-size: 1.1em; /* Slightly larger icon */
+    margin-left: 12px; /* Increased margin */
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.expense-actions button:hover {
+    color: var(--pink); /* Pink on hover */
+}
+
+.no-expenses-message {
+    text-align: center;
+    color: var(--light-grey);
+    font-style: italic;
+    padding: 25px; /* Increased padding */
+}
+
+/* Charts */
 .chart-container {
-    margin-top: 1.5rem;
+    margin-top: 35px; /* Increased margin */
+    padding-top: 25px; /* Increased padding */
+    border-top: 1px solid rgba(35, 167, 207, 0.15); /* Slightly more opaque border */
+}
+
+.chart-container h3 {
+    text-align: center;
+    color: var(--text-color-light);
+    margin-bottom: 25px; /* Increased margin */
+    font-size: 1.8em; /* Larger heading */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px; /* Increased gap */
 }
 
 .chart-row {
     display: flex;
     align-items: center;
-    margin: 8px 0;
+    margin-bottom: 18px; /* Increased margin */
 }
 
 .chart-label {
-    width: 100px;
-    font-weight: 600;
+    width: 130px; /* Slightly wider label */
+    font-weight: bold;
+    color: var(--light-grey);
+    font-size: 1em; /* Slightly larger font */
 }
 
 .chart-bar-container {
-    flex: 1;
-    display: flex;
-    align-items: center;
+    flex-grow: 1;
+    height: 22px; /* Slightly taller bar */
+    background-color: hsla(308, 89%, 49%, 0.751); /* Slightly more opaque */
+    border-radius: 12px; /* More rounded */
+    position: relative;
+    overflow: hidden;
 }
 
 .chart-bar {
-    height: 20px;
-    border-radius: 10px;
-    margin-right: 10px;
+    height: 100%;
+    border-radius: 12px; /* More rounded */
+    transition: width 0.6s ease-out; /* Slower transition */
 }
 
 .chart-value {
-    font-size: 0.9rem;
-    color: #666;
+    position: absolute;
+    right: 12px; /* Adjusted position */
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-color-light);
+    font-size: 0.9em; /* Slightly larger font */
+    text-shadow: 1px 1px 3px rgba(200, 73, 200, 0.6); /* More pronounced text shadow */
 }
 
-.dark-mode .chart-value {
-    color: #bbb;
+
+/* Alert Box */
+.alert {
+    position: fixed;
+    bottom: 30px; /* Higher from bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--golden); /* Golden for alerts */
+    color: var(--text-color-dark); /* Dark text on golden */
+    padding: 18px 30px; /* Increased padding */
+    border-radius: 10px; /* More rounded */
+    box-shadow: 0 6px 15px rgba(27, 106, 162, 0.3); /* Stronger shadow */
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.4s ease-out; /* Slower transition */
+    text-align: center;
+    font-size: 1.1em; /* Slightly larger font */
 }
 
-.reset-btn {
-    display: block;
-    margin: 1.5rem auto;
-    padding: 10px 20px;
-    background: var(--black);
-    color: white;
+.alert.success {
+    background-color: var(--golden); /* Golden for success */
+}
+
+.alert.error {
+    background-color: var(--pink); /* Pink for error */
+    color: var(--text-color-light); /* White text on pink error */
+}
+
+/* Alert buttons for confirm dialog */
+.alert-confirm-btn, .alert-cancel-btn {
+    background-color: var(--pink);
+    color: var(--white);
     border: none;
-    border-radius: 8px;
-    font-weight: 600;
+    padding: 10px 20px; /* Increased padding */
+    margin: 8px; /* Increased margin */
+    border-radius: 6px; /* More rounded */
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1em; /* Consistent font size */
 }
 
-.dark-mode .reset-btn {
-    background: #111;
+.alert-confirm-btn:hover {
+    background-color: var(--vibrant-pink);
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.alert-cancel-btn {
+    background-color: var(--dark-grey);
 }
 
+.alert-cancel-btn:hover {
+    background-color: var(--white);
+}
+
+
+/* Responsive Adjustments */
 @media (max-width: 768px) {
-    .input-section {
-        grid-template-columns: 1fr;
+    .hero-content h1 {
+        font-size: 2.8em;
     }
-    
-    .hero-content h2 {
-        font-size: 1.8rem;
+
+    .hero-content .tagline {
+        font-size: 1.4em;
+    }
+
+    .features-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px; /* Adjusted gap for vertical stacking */
+    }
+
+    .feature-card {
+        width: 90%; /* Wider cards on smaller screens */
+        padding: 30px;
+    }
+
+    .dashboard-header nav {
+        flex-direction: column;
+        gap: 20px; /* Adjusted gap */
+    }
+
+    .dashboard-header h1 {
+        font-size: 1.8em;
+    }
+
+    .container {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
+        gap: 30px; /* Adjusted gap */
     }
 }
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2.2em;
+    }
+
+    .hero-content .tagline {
+        font-size: 1.1em;
+    }
+
+    .main-cta {
+        padding: 15px 30px;
+        font-size: 1.1em;
+    }
+
+    nav {
+        top: 15px;
+        right: 15px;
+    }
+
+    .cta-button {
+        padding: 10px 18px;
+        font-size: 0.95em;
+    }
+
+    .card {
+        padding: 25px;
+    }
+
+    .input-section input,
+    .input-section select,
+    .input-section button {
+        width: calc(100% - 20px); /* Adjusted width */
+    }
+} 

@@ -3,64 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ExpenseTrack | Premium Finance Tracker</title>
+    <title>FinanceFlow | Smart Money Management</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .hero {
+            background: linear-gradient(rgba(67, 15, 59, 0.7), rgba(59, 8, 241, 0.7)), url('assets/hero-bg.jpg');
+            background-size: cover;
+            height: 100vh;
+        }
+    </style>
 </head>
 <body>
     <div class="hero">
+        <nav>
+           
+            <ul>
+                <li><a href="dashboard.html" class="cta-button">Get Started</a></li>
+            </ul>
+        </nav>
+        
         <div class="hero-content">
-            <h2>Track Your Spendings</h2>
-            <p>Spend Intentionally, Live Remarkably</p>
-        </div>
-        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Financial planning">
-    </div>
-
-    <div class="container">
-        <header>
-            <h1><i class="fas fa-coins"></i> ExpenseTrack</h1>
-            <button class="dark-mode-toggle"><i class="fas fa-moon"></i></button>
-        </header>
-
-        <div class="input-section">
-            <input type="text" id="expense-name" placeholder="Expense (e.g., Groceries)" required>
-            <input type="number" id="expense-amount" placeholder="Amount ($)" required>
-            <select id="expense-category">
-                <option value="household">🏠 Household</option>
-                <option value="shopping">👗 Shopping</option>
-                <option value="health">🏥 Health</option>
-                <option value="travel">✈️ Travel</option>
-                <option value="education">📚 Education</option>
-                <option value="pets">🐾 Pets</option>
-                <option value="gifts">🎁 Gifts</option>
-            </select>
-            <button id="add-btn"><i class="fas fa-plus"></i> Add</button>
-        </div>
-
-        <div class="receipt-upload">
-            <input type="file" id="receipt-upload" accept="image/*" hidden>
-            <label for="receipt-upload"><i class="fas fa-camera"></i> Add Receipt</label>
-        </div>
-
-        <div class="summary">
-            <h2><i class="fas fa-chart-pie"></i> Summary</h2>
-            <div class="budget-setter">
-                <label>Monthly Budget: $</label>
-                <input type="number" id="monthly-budget" value="1000">
+            <h1>Take Control of Your Finances</h1>
+            <p class="tagline">Beautiful money tracking with powerful insights</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-chart-pie"></i>
+                    <h3>Visual Analytics</h3>
+                    <p>See your spending patterns in beautiful charts</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-moon"></i>
+                    <h3>Dark Mode</h3>
+                    <p>Elegant dark theme for comfortable use</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-camera"></i>
+                    <h3>Receipt Tracking</h3>
+                    <p>Snap and store expense receipts</p>
+                </div>
             </div>
-            <div class="total">Total Spent: $<span id="total-amount">0</span></div>
-            <div class="remaining">Remaining: $<span id="remaining-amount">1000</span></div>
+            
+            <a href="dashboard.html" class="main-cta">
+                <i class="fas fa-arrow-right"></i> Launch Dashboard
+            </a>
         </div>
-
-        <div class="expense-list">
-            <h2><i class="fas fa-receipt"></i> Recent Expenses</h2>
-            <ul id="expenses"></ul>
-        </div>
-
-        <button class="reset-btn" id="reset-btn"><i class="fas fa-trash-alt"></i> Reset All Data</button>
     </div>
-
-    <script src="script.js"></script>
 </body>
-</html>
 </html>

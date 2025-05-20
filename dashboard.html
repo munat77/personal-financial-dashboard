@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanceFlow | Smart Money Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .dashboard-header {
+            background: linear-gradient(rgba(13, 132, 164, 0.9), rgba(54, 102, 116, 0.9)), url('assets/finance-bg.jpg');
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="dashboard">
+    <header class="dashboard-header">
+        <nav>
+            <a href="index.html" class="home-link">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <h1><i class="fas fa-coins"></i> My Financial Dashboard</h1>
+            <div class="user-controls">
+                <button id="dark-mode-toggle"><i class="fas fa-moon"></i></button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="input-section card">
+            <h2>Add New Expense</h2>
+            <input type="text" id="expense-name" placeholder="Expense Name" required>
+            <input type="number" id="expense-amount" placeholder="Amount" step="0.01" required>
+            <select id="expense-category">
+                <option value="household">Household 🏠</option>
+                <option value="shopping">Shopping 👗</option>
+                <option value="health">Health 🏥</option>
+                <option value="travel">Travel ✈️</option>
+                <option value="education">Education 📚</option>
+                <option value="pets">Pets 🐾</option>
+                <option value="gifts">Gifts 🎁</option>
+                <option value="food_drink">Food & Drink 🍔</option> <option value="other">Other 📦</option>
+            </select>
+            <button id="add-btn"><i class="fas fa-plus"></i> Add Expense</button>
+            
+            <div class="receipt-upload">
+                <input type="file" id="receipt-upload" accept="image/*" style="display: none;">
+                <label for="receipt-upload"><i class="fas fa-upload"></i> Upload Receipt</label>
+            </div>
+        </div>
+
+        <div class="summary card">
+            <h2>Summary</h2>
+            <div class="summary-item">
+                <span>Monthly Budget:</span>
+                <input type="number" id="monthly-budget" value="1000" step="10">
+            </div>
+            <div class="summary-item">
+                <span>Total Spent:</span>
+                <span id="total-amount">$0.00</span>
+            </div>
+            <div class="summary-item remaining">
+                <span>Remaining:</span>
+                <span id="remaining-amount" class="positive">$1000.00</span>
+            </div>
+            <button id="reset-btn" class="reset-button"><i class="fas fa-redo"></i> Reset All Data</button>
+        </div>
+
+        <div class="expense-list card">
+            <h2>Recent Expenses</h2>
+            <ul id="expenses">
+                <p class="no-expenses-message">No expenses added yet. Start tracking!</p>
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
